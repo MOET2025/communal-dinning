@@ -1,3 +1,4 @@
+
   const dinners = [{
     id: 0,
     host: 'UKH',
@@ -27,13 +28,13 @@ export default function Home() {
   const listItems = dinners.map(dinner => <li key={dinner.id}> {dinner.host} </li>);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <h2>Fællesspisning</h2>
 
       <ul>
         {listItems}
       </ul>
-      
+
     </div>
   );
 }

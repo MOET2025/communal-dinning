@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import Link from 'next/link'
 
 export async function getData() {
   const supabase = await createClient();
@@ -7,25 +8,38 @@ export async function getData() {
   return events;
 }
 
-export default async function Events() {
+export async function Events() {
   const data = await getData();
 
   if(data !== null) {
     //display data in list!!!!!!
     if(data.length > 0) {
       return (
-        <div key={data.id}>
-          <h2> event host: {data.event_host}</h2>
-          <h2> event name: {data.event_name}</h2>
-          <h2> date: {data.event_date}</h2>
-        </div>
+        <p></p>
 
-        
       )
     }
 
   } else {
     return <p>no events yet!</p>
   }
+}
+
+export default function Page() {
+  Events();
+  return (
+          <nav className='navbar p-4'>
+        <div className='container mx-auto flex justify-between item-center'>
+          <div className='block'>
+            <Link href='/events' className='mr-4'>
+              Forside
+            </Link>
+            <Link href='/' className='mr-4'>
+              Om Fællesspisning
+            </Link>
+          </div>
+        </div>
+      </nav>
+  )
 }
 

@@ -1,29 +1,21 @@
-
+import Image from 'next/image'
+import faellesspisning from '../public/faellesspisning.png'
 
 export default function Home() {
 
   return (
-    <div>
-      <div className="flex justify-center">
+    <div  className='flex flex-col items-center'>
+      <Image
+       
+        src={faellesspisning}
+        width={900}
+        height={900}
+        alt="Picture of dinner" />
+
+      <div className="font-mono text-2xl">
         <p>Fællesspisning</p>
       </div>
 
-      <div className="relative overflow-hidden shadow-md rounded-lg">
-        <table className="table-auto w-full text-left">
-          <thead className=" bg-[#afc1e5] text-[#3f4146]">
-            <tr>
-              <td className="py-3    p-4"> November </td>
-              <td className="py-3    p-4"></td>
-            </tr>
-          </thead>
-          <tbody className="bg-white text-gray-500 bg-[#FFFFFF] text-[#6b7280]">
-            <tr className=" py-5">
-              <td className=" py-5 border  border-gray-300   p-4">DATO</td>
-              <td className=" py-5 border  border-gray-300   p-4">HOST</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 }

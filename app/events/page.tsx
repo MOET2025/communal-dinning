@@ -28,14 +28,14 @@ export async function Events() {
 export default function Page() {
   Events();
   return (
-          <nav className='navbar p-4'>
+      <nav className='navbar p-4 w-full'>
         <div className='container mx-auto flex justify-between item-center'>
           <div className='block'>
-            <Link href='/events' className='mr-4'>
+            <Link href='/' className='mr-4'>
               Forside
             </Link>
-            <Link href='/' className='mr-4'>
-              Om Fællesspisning
+            <Link href='/events' className='mr-4'>
+              Begivenhedsoversigt
             </Link>
           </div>
         </div>

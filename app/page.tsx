@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import faellesspisning from '../public/faellesspisning.png'
+import faellesspisning from '../public/faellesspisning.svg'
 
 export default function Home() {
 

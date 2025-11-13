@@ -1,33 +1,32 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from 'next/link'
 
-export async function getData() {
+export default async function Page() {
   const supabase = await createClient();
-  const {data: events} = await supabase.from("Event").select();
-  
-  return events;
-}
+  const { data: events } = await supabase.from("Event").select();
+  let listItems: { id: any; date: any; host: string; name: string; }[] = [];
 
-export async function Events() {
-  const data = await getData();
+  events?.forEach(event => {
+    listItems.push(
+      {
+        id: event.id,
+        date: event.event_date,
+        host: event.event_host,
+        name: event.event_name
+      }
+    );
+  });
 
-  if(data !== null) {
-    //display data in list!!!!!!
-    if(data.length > 0) {
-      return (
-        <p></p>
+  const list = listItems.map(event => (
+    <div key={event.id} className="p-2">
+      <div className="font-semibold">{event.name}</div>
+      <div className="text-sm text-gray-600">Arrangør: {event.host}</div>
+      <div className="text-sm text-gray-600">Dato: {event.date}</div>
+    </div>
+  ));
 
-      )
-    }
-
-  } else {
-    return <p>no events yet!</p>
-  }
-}
-
-export default function Page() {
-  Events();
   return (
+    <div className='flex flex-col items-center max-w-4xl mx-auto'>
       <nav className='navbar p-4 w-full'>
         <div className='container mx-auto flex justify-between item-center'>
           <div className='block'>
@@ -40,6 +39,16 @@ export default function Page() {
           </div>
         </div>
       </nav>
+
+      <div>
+        {list}
+      </div>
+
+
+    </div>
   )
+
+
+
 }
 

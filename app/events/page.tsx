@@ -4,6 +4,7 @@ import Link from 'next/link'
 export default async function Page() {
   const supabase = await createClient();
   const { data: events } = await supabase.from("Event").select();
+  //somehow get events based on the date
   let listItems: { id: any; date: any; host: string; name: string; }[] = [];
 
   events?.forEach(event => {

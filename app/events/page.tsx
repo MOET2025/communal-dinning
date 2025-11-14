@@ -3,8 +3,9 @@ import Link from 'next/link'
 
 export default async function Page() {
   const supabase = await createClient();
+  //TODO - get initial events based on current month and date (only display events from today and forward).
+  //TODO - somewhere else it should be possible to get events based on future months
   const { data: events } = await supabase.from("Event").select();
-  //somehow get events based on the date
   let listItems: { id: any; date: any; host: string; name: string; }[] = [];
 
   events?.forEach(event => {
@@ -18,11 +19,30 @@ export default async function Page() {
     );
   });
 
+  //TODO move this into own class to ensure only running on server
+  let date = new Date();
+  //lol
+  const monthNames = [
+    'Januar',
+    'Februar',
+    'Marts',
+    'April',
+    'Maj',
+    'Juni',
+    'Juli',
+    'August',
+    'September',
+    'Oktober',
+    'November',
+    'December'
+  ];
+
   const list = listItems.map(event => (
-    <div key={event.id} className="p-2">
-      <div className="font-semibold">{event.name}</div>
-      <div className="text-sm text-gray-600">Arrangør: {event.host}</div>
-      <div className="text-sm text-gray-600">Dato: {event.date}</div>
+    <div key={event.id} className="border-t-1 border-solid p-2">
+      <div className="font-semibold">{event.host}</div>
+      <div className="text-sm text-gray-600">{event.date}</div>
+      <div className="text-sm text-gray-600">{event.name}</div>
+      <div className="text-sm text-gray-600"> <Link href='#'>Se mere</Link></div>
     </div>
   ));
 
@@ -41,9 +61,14 @@ export default async function Page() {
         </div>
       </nav>
 
-      <div>
-        {list}
+      <div className="p-2">
+        <h1 className="p-2">Fællesspisninger</h1>
+        <h1 className="p-2"> &#8592; {monthNames[date.getMonth()]} {date.getFullYear()}  &#8594; </h1>
+        <div>
+          {list}
+        </div>
       </div>
+
 
 
     </div>
